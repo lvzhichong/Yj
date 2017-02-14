@@ -13,7 +13,7 @@ namespace Yj.Web.Controllers
     public class LogController : BaseAuthorizeController
     {
         /// <summary>
-        /// 系统权限
+        /// 系统日志
         /// </summary>
         /// <param name="model"></param>
         /// <param name="isSearch"></param>
@@ -34,7 +34,7 @@ namespace Yj.Web.Controllers
         }
 
         /// <summary>
-        /// 系统权限
+        /// 系统日志
         /// </summary>
         /// <param name="model"></param>
         /// <param name="page"></param>
@@ -50,7 +50,7 @@ namespace Yj.Web.Controllers
         }
 
         /// <summary>
-        /// 获取权限数据
+        /// 获取日志数据
         /// </summary>
         /// <returns></returns>
         private PagedList<ls_log> GetLogs(ls_log model, int pageIndex)

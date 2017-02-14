@@ -131,6 +131,9 @@ namespace Yj.Web.Controllers
 
                         if (result)
                         {
+                            // 日志
+                            Biz.ls_logBiz.Instance.AddLog("修改用户信息成功！，修改后的用户信息：" + Common.JsonHelper.Serialize(model));
+
                             data.Message = "修改用户成功！";
                         }
                     }
@@ -141,11 +144,15 @@ namespace Yj.Web.Controllers
                         model.is_approved = true;
                         model.create_date = DateTime.Now;
                         model.last_login_date = DateTime.Now;
+                        model.modify_date = DateTime.Now;
 
                         result = Biz.ls_userBiz.Instance.AddModel(model);
 
                         if (result)
                         {
+                            // 日志
+                            Biz.ls_logBiz.Instance.AddLog("添加用户信息成功！，添加的用户信息：" + Common.JsonHelper.Serialize(model));
+
                             data.Message = "添加用户成功！";
                         }
                     }
