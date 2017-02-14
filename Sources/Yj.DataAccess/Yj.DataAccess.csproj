@@ -7,8 +7,8 @@
     <ProjectGuid>{EF9E766D-B2AD-4F91-8874-7513D6A91BCF}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Ls.DataAccess</RootNamespace>
-    <AssemblyName>Ls.DataAccess</AssemblyName>
+    <RootNamespace>Yj.DataAccess</RootNamespace>
+    <AssemblyName>Yj.DataAccess</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -63,6 +63,16 @@
     <Compile Include="Models\Mapping\ls_roleMap.cs" />
     <Compile Include="Models\Mapping\ls_userMap.cs" />
     <Compile Include="Models\Mapping\ls_user_dutyMap.cs" />
+    <Compile Include="Models\Mapping\yj_taskMap.cs" />
+    <Compile Include="Models\Mapping\yj_teacherMap.cs" />
+    <Compile Include="Models\Mapping\yj_teacher_taskMap.cs" />
+    <Compile Include="Models\Mapping\yj_teamMap.cs" />
+    <Compile Include="Models\Mapping\yj_team_teacherMap.cs" />
+    <Compile Include="Models\yj_task.cs" />
+    <Compile Include="Models\yj_teacher.cs" />
+    <Compile Include="Models\yj_teacher_task.cs" />
+    <Compile Include="Models\yj_team.cs" />
+    <Compile Include="Models\yj_team_teacher.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
