@@ -7,8 +7,8 @@
     <ProjectGuid>{D1DE6698-BFD6-4651-A916-027B60566F2B}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Ls.Common</RootNamespace>
-    <AssemblyName>Ls.Common</AssemblyName>
+    <RootNamespace>Yj.Common</RootNamespace>
+    <AssemblyName>Yj.Common</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

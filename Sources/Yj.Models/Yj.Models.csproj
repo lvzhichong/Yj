@@ -7,8 +7,8 @@
     <ProjectGuid>{84F38DC7-CEAF-42CF-838E-2517509AAE6F}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Ls.Models</RootNamespace>
-    <AssemblyName>Ls.Models</AssemblyName>
+    <RootNamespace>Yj.Models</RootNamespace>
+    <AssemblyName>Yj.Models</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
