@@ -1,0 +1,55 @@
+﻿@model PagedList<Yj.Models.ls_duty>
+@using Webdiyer.WebControls.Mvc;
+<div id="gridTable">
+    <table class="table table-border table-bordered table-bg">
+        <thead>
+            <tr>
+                <th scope="col" colspan="9">角色列表</th>
+            </tr>
+            <tr class="text-c">
+                <th width="25">
+                    <input type="checkbox" name="" value=""></th>
+                <th>角色名</th>
+                <th>描述</th>
+                <th width="160">操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Yj.Models.ls_duty duty in Model)
+            {
+                <tr class="text-c">
+                    <td>
+                        <input type="checkbox" value="@duty.duty_id" name="">
+                    </td>
+                    <td>@duty.duty_name</td>
+                    <td>@duty.description</td>
+                    <td>
+                        <a href="javascript:;" onclick="edit_duty('编辑角色','/Duty/EditDuty?duty_id=@duty.duty_id','800','320')"><i class="Hui-iconfont" title="编辑"></i></a>
+                        &nbsp;&nbsp;|&nbsp;&nbsp;<a id="delete" href="javascript:del_duty('@duty.duty_id');"><i class="Hui-iconfont" title="删除"></i></a>
+                        &nbsp;&nbsp;|&nbsp;&nbsp;<a id="modify_role" href="javascript:duty_role_edit('角色权限编辑', '/Duty/DutyModule?duty_id=@duty.duty_id');">修改权限</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    @Html.AjaxPager(Model,
+    new PagerOptions
+    {
+        Id = "pager",
+        CssClass = "pager",
+        PageIndexParameterName = "page",
+        ShowPageIndexBox = true,
+        FirstPageText = "首页",
+        PrevPageText = "上一页",
+        NextPageText = "下一页",
+        LastPageText = "末页",
+        PageIndexBoxType = PageIndexBoxType.TextBox,
+        PageIndexBoxWrapperFormatString = "请输入页数{0}",
+        GoButtonText = "转到"
+    },
+    new AjaxOptions
+    {
+        HttpMethod = "Post",
+        UpdateTargetId = "gridTable"
+    })
+</div>

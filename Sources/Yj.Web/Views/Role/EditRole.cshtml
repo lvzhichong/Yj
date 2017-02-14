@@ -1,0 +1,55 @@
+﻿@model Yj.Models.ls_role
+@{
+    ViewBag.Title = string.Format("添加权限 - {0}", Yj.Common.Config.WebTitle);
+}
+<div class="page-container" id="edit">
+    @using (Ajax.BeginForm("EditRole", "Role", new { role_id = Request.QueryString["role_id"] }, new AjaxOptions { HttpMethod = "Post", UpdateTargetId = "edit", OnSuccess = "OnSuccess" }, new { @class = "form form-horizontal", id = "form-article-add" }))
+    {
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>代号：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                @Html.TextBoxFor(m => m.role_code, new { @class = "input-text", style = "width: 360px" })
+                @Html.ValidationMessageFor(m => m.role_code)
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>权限名：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                @Html.HiddenFor(m => m.role_id)
+                @Html.TextBoxFor(m => m.role_name, new { @class = "input-text", style = "width: 360px" })
+                @Html.ValidationMessageFor(m => m.role_name)
+            </div>
+        </div>
+        <div class="row cl">
+            <div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-2">
+                <button class="btn btn-primary radius" type="submit"><i class="Hui-iconfont">&#xe632;</i> 确定</button>
+                <button onclick="layer_close();" class="btn btn-default radius" type="button">&nbsp;&nbsp;取消&nbsp;&nbsp;</button>
+            </div>
+        </div>
+    }
+</div>
+<script type="text/javascript" src="/Content/lib/micro/jquery.validate.min.js"></script>
+<script type="text/javascript" src="/Content/lib/micro/jquery.validate.unobtrusive.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var role_id = '@HttpContext.Current.Request["role_id"]';
+
+        if (!isNullOrEmpty(role_id)) {
+            // 编辑
+            $('#role_code').attr('readonly', 'readonly');
+        }
+    });
+
+    // 执行成功时，关闭layer，刷新后面的列表
+    function OnSuccess(data) {
+        // 提示信息
+        layer.msg(data.Message, { icon: 1, time: 1000 });
+        // 刷新后面的列表
+        if (String(data.Flag).toLowerCase() == 'true') {
+            // 父页面必须写reloadData函数
+            window.parent.reloadData();
+        }
+        // 关闭弹出框
+        delay_layer_close(1000);
+    }
+</script>

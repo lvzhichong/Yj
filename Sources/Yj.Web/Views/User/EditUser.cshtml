@@ -1,0 +1,84 @@
+﻿@model Yj.Models.ls_user
+@{
+    ViewBag.Title = string.Format("添加用户 - {0}", Yj.Common.Config.WebTitle);
+}
+<div class="page-container" id="edit">
+    @using (Ajax.BeginForm("EditUser", "User", new { user_id = Request.QueryString["user_id"] }, new AjaxOptions { HttpMethod = "Post", UpdateTargetId = "edit", OnSuccess = "OnSuccess" }, new { @class = "form form-horizontal", id = "form-article-add" }))
+    {
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>模块分类：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <span class="select-box" style="width: 360px; padding-left: 0px;">
+                    @Html.DropDownListFor(m => m.duty_id, ViewBag.Dutys as List<SelectListItem>, new { @class = "select", style = "width: 355px" })
+                </span>
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>用户名：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                @Html.HiddenFor(m => m.user_id)
+                @Html.TextBoxFor(m => m.user_name, new { @class = "input-text", style = "width: 360px" })
+                @Html.ValidationMessageFor(m => m.user_name)
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-2">昵称：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                @Html.TextBoxFor(m => m.nick_name, new { @class = "input-text", style = "width: 360px" })
+                @Html.ValidationMessageFor(m => m.nick_name)
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>Email：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                @Html.TextBoxFor(m => m.email, new { @class = "input-text", style = "width: 360px" })
+                @Html.ValidationMessageFor(m => m.email)
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>密码：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                @Html.PasswordFor(m => m.user_password, new { @class = "input-text", style = "width: 360px" })
+                @Html.ValidationMessageFor(m => m.user_password)
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>确认密码：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                @Html.PasswordFor(m => m.user_confirm_password, new { @class = "input-text", style = "width: 360px" })
+                @Html.ValidationMessageFor(m => m.user_confirm_password)
+            </div>
+        </div>
+        <div class="row cl">
+            <div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-2">
+                <button class="btn btn-primary radius" type="submit"><i class="Hui-iconfont">&#xe632;</i> 确定</button>
+                <button onclick="layer_close();" class="btn btn-default radius" type="button">&nbsp;&nbsp;取消&nbsp;&nbsp;</button>
+            </div>
+        </div>
+    }
+</div>
+<script type="text/javascript" src="/Content/lib/micro/jquery.validate.min.js"></script>
+<script type="text/javascript" src="/Content/lib/micro/jquery.validate.unobtrusive.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var user_id = '@HttpContext.Current.Request["user_id"]';
+
+        if (!isNullOrEmpty(user_id)) {
+            // 编辑
+            $('#UserName').attr('readonly', 'readonly');
+        }
+    });
+
+    // 执行成功时，关闭layer，刷新后面的列表
+    function OnSuccess(data) {
+        // 提示信息
+        layer.msg(data.Message, { icon: 1, time: 1000 });
+        // 刷新后面的列表
+        if (String(data.Flag).toLowerCase() == 'true') {
+            // 父页面必须写reloadData函数
+            window.parent.reloadData();
+        }
+        // 关闭弹出框
+        delay_layer_close(1000);
+    }
+</script>

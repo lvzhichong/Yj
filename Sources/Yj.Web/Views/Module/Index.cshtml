@@ -1,0 +1,70 @@
+﻿@{
+    ViewBag.Title = string.Format("模块管理 - {0}", Yj.Common.Config.WebTitle);
+}
+<nav class="breadcrumb">
+    <i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 模块管理 <span class="c-gray en">&gt;</span> 模块列表
+    <a class="btn btn-success radius r" style="line-height: 1.6em; margin-top: 3px" href="javascript:location.replace(location.href);" title="刷新"><i class="Hui-iconfont">&#xe68f;</i></a>
+</nav>
+<div class="page-container">
+    @using (Ajax.BeginForm(new AjaxOptions { HttpMethod = "Get", UpdateTargetId = "gridTable" }))
+    {
+        <div class="text-c">
+            <input type="text" class="input-text" style="width: 250px" placeholder="输入模块名称" id="module_name" name="module_name">
+            <input type="hidden" id="isSearch" name="isSearch" value="1" />
+            <button type="submit" class="btn btn-success" id="btnSearch" name=""><i class="Hui-iconfont">&#xe665;</i> 搜模块</button>
+        </div>
+    }
+    <div class="cl pd-5 bg-1 bk-gray mt-20">
+        <span class="l">
+            <a href="javascript:;" onclick="datadel()" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a>
+            <a href="javascript:;" onclick="edit_module('添加模块','/Module/EditModule','800','400')" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i> 添加模块</a>
+        </span>
+    </div>
+    @Html.Partial("ModuleListPartial")
+</div>
+<script type="text/javascript">
+    // 刷新列表
+    function reloadData() {
+        $('#btnSearch').click();
+    }
+
+    /*
+        参数解释：
+        title	标题
+        url		请求的url
+        id		需要操作的数据id
+        w		弹出层宽度（缺省调默认值）
+        h		弹出层高度（缺省调默认值）
+    */
+    /*管理员-增加*/
+    function edit_module(title, url, w, h) {
+        layer_show(title, url, w, h);
+    }
+    /*管理员-删除*/
+    function del_module(id) {
+        if (!isNullOrEmpty(id)) {
+            layer.confirm('确认要删除吗？', function (index) {
+                // 删除模块
+                $.ajax({
+                    type: 'Post',
+                    url: '/Module/DeleteModule',
+                    data: { module_id: id },
+                    dataType: 'text', // 返回数据格式
+                    success: function (data) {
+                        if (data.toLowerCase() == 'true') {
+                            layer.msg('删除成功!', { icon: 1, time: 1000 });
+                            $('#btnSearch').click();
+                        }
+                        else {
+                            layer.msg('删除失败!', { icon: 1, time: 1000 });
+                        }
+                    }
+                });
+            });
+        }
+    }
+    /*管理员-批量删除*/
+    function datadel() {
+        layer.msg('该功能暂未开通!', { icon: 1, time: 1000 });
+    }
+</script>

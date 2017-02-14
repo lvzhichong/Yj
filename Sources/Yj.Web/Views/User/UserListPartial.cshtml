@@ -1,0 +1,67 @@
+﻿@model PagedList<Yj.Models.ls_user>
+@using Webdiyer.WebControls.Mvc;
+<div id="gridTable">
+    <table class="table table-border table-bordered table-bg">
+        <thead>
+            <tr>
+                <th scope="col" colspan="10">用户列表</th>
+            </tr>
+            <tr class="text-c">
+                <th width="25">
+                    <input type="checkbox" name="" value=""></th>
+                <th>角色</th>
+                <th>用户名</th>
+                <th>昵称</th>
+                <th width="100">是否允许登录</th>
+                <th width="100">是否已锁定</th>
+                <th width="160">锁定时间</th>
+                <th width="160">修改时间</th>
+                <th width="160">上次登录时间</th>
+                <th width="160">操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Yj.Models.ls_user user in Model)
+            {
+                <tr class="text-c">
+                    <td>
+                        <input type="checkbox" value="@user.user_id" name="">
+                    </td>
+                    <td>@Yj.Biz.Cache.CommonCache.GetDutyName(user.duty_id)</td>
+                    <td>@user.user_name</td>
+                    <td>@user.nick_name</td>
+                    <td>@Html.SpanText(user.is_approved ? "允许" : "不允许", user.is_approved ? MvcExtensions.SpanLevel.Success : MvcExtensions.SpanLevel.Danger)</td>
+                    <td>@Html.SpanText(user.is_lock ? "锁定" : "未锁定", user.is_lock ? MvcExtensions.SpanLevel.Danger : MvcExtensions.SpanLevel.Success)</td>
+                    <td>@(user.is_lock && user.lock_date != null ? user.lock_date.Value.ToString(Yj.Common.DateFormat.Date_Format_String_1) : "")</td>
+                    <td>@user.modify_date.ToString(Yj.Common.DateFormat.Date_Format_String_1)</td>
+                    <td>@user.last_login_date.ToString(Yj.Common.DateFormat.Date_Format_String_1)</td>
+                    <td>
+                        <a href="javascript:;" onclick="edit_user('编辑用户','/User/EditUser?user_id=@user.user_id','800','430')"><i class="Hui-iconfont" title="编辑"></i></a>
+                        &nbsp;&nbsp;|&nbsp;&nbsp;<a id="delete" href="javascript:del_user('@user.user_id');"><i class="Hui-iconfont" title="删除"></i></a>
+                        &nbsp;&nbsp;|&nbsp;&nbsp;<a id="lock" href="javascript:lock_user('@user.user_id', '@user.is_lock');">@(@user.is_lock ? "解锁" : "锁定")</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    @Html.AjaxPager(Model,
+    new PagerOptions
+    {
+        Id = "pager",
+        CssClass = "pager",
+        PageIndexParameterName = "page",
+        ShowPageIndexBox = true,
+        FirstPageText = "首页",
+        PrevPageText = "上一页",
+        NextPageText = "下一页",
+        LastPageText = "末页",
+        PageIndexBoxType = PageIndexBoxType.TextBox,
+        PageIndexBoxWrapperFormatString = "请输入页数{0}",
+        GoButtonText = "转到"
+    },
+    new AjaxOptions
+    {
+        HttpMethod = "Post",
+        UpdateTargetId = "gridTable"
+    })
+</div>

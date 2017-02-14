@@ -1,0 +1,47 @@
+﻿@model Yj.Models.ls_duty
+@{
+    ViewBag.Title = string.Format("添加角色 - {0}", Yj.Common.Config.WebTitle);
+}
+<div class="page-container" id="edit">
+    @using (Ajax.BeginForm("EditDuty", "Duty", new { duty_id = Request.QueryString["duty_id"] }, new AjaxOptions { HttpMethod = "Post", UpdateTargetId = "edit", OnSuccess = "OnSuccess" }, new { @class = "form form-horizontal", id = "form-article-add" }))
+    {
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>角色名：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                @Html.HiddenFor(m => m.duty_id)
+                @Html.TextBoxFor(m => m.duty_name, new { @class = "input-text", style = "width: 360px" })
+                @Html.ValidationMessageFor(m => m.duty_name)
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-2">描述：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                @Html.TextAreaFor(m => m.description, new { @class = "textarea", placeholder = "说点什么...", style = "width: 360px", onkeyup = "textarealength(this,200)" })
+                @Html.ValidationMessageFor(m => m.description)
+                <p class="textarea-numberbar"><em class="textarea-length">0</em>/200</p>
+            </div>
+        </div>
+        <div class="row cl">
+            <div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-2">
+                <button class="btn btn-primary radius" type="submit"><i class="Hui-iconfont">&#xe632;</i> 确定</button>
+                <button onclick="layer_close();" class="btn btn-default radius" type="button">&nbsp;&nbsp;取消&nbsp;&nbsp;</button>
+            </div>
+        </div>
+    }
+</div>
+<script type="text/javascript" src="/Content/lib/micro/jquery.validate.min.js"></script>
+<script type="text/javascript" src="/Content/lib/micro/jquery.validate.unobtrusive.min.js"></script>
+<script type="text/javascript">
+    // 执行成功时，关闭layer，刷新后面的列表
+    function OnSuccess(data) {
+        // 提示信息
+        layer.msg(data.Message, { icon: 1, time: 1000 });
+        // 刷新后面的列表
+        if (String(data.Flag).toLowerCase() == 'true') {
+            // 父页面必须写reloadData函数
+            window.parent.reloadData();
+        }
+        // 关闭弹出框
+        delay_layer_close(1000);
+    }
+</script>

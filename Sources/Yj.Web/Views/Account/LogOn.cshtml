@@ -1,0 +1,43 @@
+﻿@model Yj.Web.Models.LogOnModel
+@{
+    ViewBag.Title = string.Format("登录 - {0}", Yj.Common.Config.WebTitle);
+}
+<link href="/Content/static/h-ui.admin/css/H-ui.login.css" rel="stylesheet" type="text/css" />
+<div class="header"></div>
+<div class="loginWraper">
+    <div id="loginform" class="loginBox">
+        @using (Html.BeginForm("LogOn", "Account", FormMethod.Post, new { @class = "form form-horizontal" }))
+        {
+            <div class="row cl">
+                <label class="form-label col-xs-3"><i class="Hui-iconfont">&#xe60d;</i></label>
+                <div class="formControls col-xs-8">
+                    @Html.TextBoxFor(m => m.UserName, new { placeholder = "账户", @class = "input-text size-L" })
+                    @Html.ValidationMessageFor(m => m.UserName)
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-3"><i class="Hui-iconfont">&#xe60e;</i></label>
+                <div class="formControls col-xs-8">
+                    @Html.PasswordFor(m => m.Password, new { placeholder = "密码", @class = "input-text size-L" })
+                    @Html.ValidationMessageFor(m => m.Password)
+                </div>
+            </div>
+            <div class="row cl">
+                <div class="formControls col-xs-8 col-xs-offset-3">
+                    <label for="online">
+                        @Html.CheckBoxFor(m => m.RememberMe) 使我保持登录状态
+                    </label>
+                </div>
+            </div>
+            <div class="row cl">
+                <div class="formControls col-xs-8 col-xs-offset-3">
+                    <input name="" type="submit" class="btn btn-success radius size-L" value="&nbsp;登&nbsp;&nbsp;&nbsp;&nbsp;录&nbsp;">
+                    <input name="" type="reset" class="btn btn-default radius size-L" value="&nbsp;取&nbsp;&nbsp;&nbsp;&nbsp;消&nbsp;">
+                </div>
+            </div>
+        }
+    </div>
+</div>
+<div class="footer">Copyright 大米阅卷V1.0 by ls</div>
+<script type="text/javascript" src="/Content/lib/micro/jquery.validate.min.js"></script>
+<script type="text/javascript" src="/Content/lib/micro/jquery.validate.unobtrusive.min.js"></script>
