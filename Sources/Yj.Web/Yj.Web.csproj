@@ -2949,6 +2949,8 @@
     <Content Include="Views\Module\EditModule.cshtml" />
     <Content Include="Views\Module\Index.cshtml" />
     <Content Include="Views\Module\ModuleListPartial.cshtml" />
+    <Content Include="Views\Log\Index.cshtml" />
+    <Content Include="Views\Log\LogListPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Yj.Biz\Yj.Biz.csproj">

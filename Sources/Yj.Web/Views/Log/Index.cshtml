@@ -1,0 +1,28 @@
+﻿@{
+    ViewBag.Title = string.Format("日志管理 - {0}", Yj.Common.Config.WebTitle);
+}
+<nav class="breadcrumb">
+    <i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 日志管理 <span class="c-gray en">&gt;</span> 日志列表
+    <a class="btn btn-success radius r" style="line-height: 1.6em; margin-top: 3px" href="javascript:location.replace(location.href);" title="刷新"><i class="Hui-iconfont">&#xe68f;</i></a>
+</nav>
+<div class="page-container">
+    @using (Ajax.BeginForm(new AjaxOptions { HttpMethod = "Get", UpdateTargetId = "gridTable" }))
+    {
+        <div class="text-c">
+            <input type="text" class="input-text" style="width: 250px" placeholder="输入日志名称" id="log_description" name="log_description">
+            <input type="hidden" id="isSearch" name="isSearch" value="1" />
+            <button type="submit" class="btn btn-success" id="btnSearch" name=""><i class="Hui-iconfont">&#xe665;</i> 搜日志</button>
+        </div>
+    }
+    <div class="cl pd-5 bg-1 bk-gray mt-20">
+        <span class="l">
+        </span>
+    </div>
+    @Html.Partial("LogListPartial")
+</div>
+<script type="text/javascript">
+    // 刷新列表
+    function reloadData() {
+        $('#btnSearch').click();
+    }
+</script>
