@@ -1,26 +1,26 @@
 ﻿@{
-    ViewBag.Title = string.Format("小组管理 - {0}", Yj.Common.Config.WebTitle);
+    ViewBag.Title = string.Format("教师管理 - {0}", Yj.Common.Config.WebTitle);
 }
 <nav class="breadcrumb">
-    <i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 小组管理 <span class="c-gray en">&gt;</span> 小组列表
+    <i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 教师管理 <span class="c-gray en">&gt;</span> 教师列表
     <a class="btn btn-success radius r" style="line-height: 1.6em; margin-top: 3px" href="javascript:location.replace(location.href);" title="刷新"><i class="Hui-iconfont">&#xe68f;</i></a>
 </nav>
 <div class="page-container">
     @using (Ajax.BeginForm(new AjaxOptions { HttpMethod = "Get", UpdateTargetId = "gridTable" }))
     {
         <div class="text-c">
-            <input type="text" class="input-text" style="width: 250px" placeholder="输入小组名称" id="team_name" name="team_name">
+            <input type="text" class="input-text" style="width: 250px" placeholder="输入教师名称" id="teacher_name" name="teacher_name">
             <input type="hidden" id="isSearch" name="isSearch" value="1" />
-            <button type="submit" class="btn btn-success" id="btnSearch" name=""><i class="Hui-iconfont">&#xe665;</i> 搜小组</button>
+            <button type="submit" class="btn btn-success" id="btnSearch" name=""><i class="Hui-iconfont">&#xe665;</i> 搜教师</button>
         </div>
     }
     <div class="cl pd-5 bg-1 bk-gray mt-20">
         <span class="l">
             <a href="javascript:;" onclick="datadel()" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a>
-            <a href="javascript:;" onclick="edit_team('添加小组','/Team/EditTeam','800','360')" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i> 添加小组</a>
+            <a href="javascript:;" onclick="edit_teacher('添加教师','/Teacher/EditTeacher','800','360')" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i> 添加教师</a>
         </span>
     </div>
-    @Html.Partial("TeamListPartial")
+    @Html.Partial("TeacherListPartial")
 </div>
 <script type="text/javascript">
     // 刷新列表
@@ -37,18 +37,18 @@
         h		弹出层高度（缺省调默认值）
     */
     /*管理员-增加*/
-    function edit_team(title, url, w, h) {
+    function edit_teacher(title, url, w, h) {
         layer_show(title, url, w, h);
     }
     /*管理员-删除*/
-    function del_team(id) {
+    function del_teacher(id) {
         if (!isNullOrEmpty(id)) {
             layer.confirm('确认要删除吗？', function (index) {
-                // 删除小组
+                // 删除教师
                 $.ajax({
                     type: 'Post',
-                    url: '/Team/DeleteTeam',
-                    data: { team_id: id },
+                    url: '/Teacher/DeleteTeacher',
+                    data: { teacher_id: id },
                     dataType: 'text', // 返回数据格式
                     success: function (data) {
                         if (data.toLowerCase() == 'true') {

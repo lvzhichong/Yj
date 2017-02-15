@@ -1,23 +1,23 @@
-﻿@model Yj.Models.yj_team
+﻿@model Yj.Models.yj_teacher
 @{
-    ViewBag.Title = string.Format("添加权限 - {0}", Yj.Common.Config.WebTitle);
+    ViewBag.Title = string.Format("添加教师 - {0}", Yj.Common.Config.WebTitle);
 }
 <div class="page-container" id="edit">
-    @using (Ajax.BeginForm("EditTeam", "Team", new { team_id = Request.QueryString["team_id"] }, new AjaxOptions { HttpMethod = "Post", UpdateTargetId = "edit", OnSuccess = "OnSuccess" }, new { @class = "form form-horizontal", id = "form-article-add" }))
+    @using (Ajax.BeginForm("EditTeacher", "Teacher", new { teacher_id = Request.QueryString["teacher_id"] }, new AjaxOptions { HttpMethod = "Post", UpdateTargetId = "edit", OnSuccess = "OnSuccess" }, new { @class = "form form-horizontal", id = "form-article-add" }))
     {
         <div class="row cl">
-            <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>代号：</label>
+            <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>教师名：</label>
             <div class="formControls col-xs-8 col-sm-9">
-                @Html.HiddenFor(m => m.team_id)
-                @Html.TextBoxFor(m => m.team_name, new { @class = "input-text", style = "width: 360px" })
-                @Html.ValidationMessageFor(m => m.team_name)
+                @Html.HiddenFor(m => m.teacher_id)
+                @Html.TextBoxFor(m => m.teacher_name, new { @class = "input-text", style = "width: 360px" })
+                @Html.ValidationMessageFor(m => m.teacher_name)
             </div>
         </div>
         <div class="row cl">
-            <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>权限名：</label>
+            <label class="form-label col-xs-4 col-sm-2">教师描述：</label>
             <div class="formControls col-xs-8 col-sm-9">
-                @Html.TextAreaFor(m => m.team_description, new { @class = "textarea", placeholder = "说点什么...", style = "width: 360px", onkeyup = "textarealength(this,200)" })
-                @Html.ValidationMessageFor(m => m.team_description)
+                @Html.TextAreaFor(m => m.teacher_description, new { @class = "textarea", placeholder = "说点什么...", style = "width: 360px", onkeyup = "textarealength(this,200)" })
+                @Html.ValidationMessageFor(m => m.teacher_description)
                 <p class="textarea-numberbar"><em class="textarea-length">0</em>/200</p>
             </div>
         </div>
@@ -33,11 +33,11 @@
 <script type="text/javascript" src="/Content/lib/micro/jquery.validate.unobtrusive.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {
-        var team_id = '@HttpContext.Current.Request["team_id"]';
+        var teacher_id = '@HttpContext.Current.Request["teacher_id"]';
 
-        if (!isNullOrEmpty(team_id)) {
+        if (!isNullOrEmpty(teacher_id)) {
             // 编辑
-            $('#team_code').attr('readonly', 'readonly');
+            $('#teacher_code').attr('readonly', 'readonly');
         }
     });
 
