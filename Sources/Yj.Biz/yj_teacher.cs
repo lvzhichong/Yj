@@ -52,7 +52,39 @@ namespace Yj.Biz
         public IEnumerable<Models.yj_teacher> GetList(Models.yj_teacher model, int pageIndex, int pageSize, out int totalCount)
         {
             totalCount = 0;
-            return null;
+
+            List<Models.yj_teacher> teachers = null;
+
+            try
+            {
+                // 查询条件
+                Expression<Func<yj_teacher, bool>> predicate = PredicateBuilder.True<yj_teacher>();
+
+                if (model != null)
+                {
+                    if (!string.IsNullOrEmpty(model.teacher_name))
+                    {
+                        predicate = predicate.And(p => p.teacher_name.Contains(model.teacher_name));
+                    }
+                }
+
+                // 排序
+                Expression<Func<yj_teacher, int>> orderby = r => r.teacher_id;
+
+                teachers = GetObjects(predicate, orderby, true, pageIndex, pageSize, out totalCount).ToList();
+            }
+            catch (Exception ex)
+            {
+                Common.Logger.Error("分页获取 teacher 信息，ERROR：", ex);
+            }
+
+            // 为空时，给默认
+            if (teachers == null)
+            {
+                teachers = new List<Models.yj_teacher>();
+            }
+
+            return teachers;
         }
 
         /// <summary>
@@ -60,7 +92,38 @@ namespace Yj.Biz
         /// </summary>
         public IEnumerable<Models.yj_teacher> GetList(Models.yj_teacher model)
         {
-            return null;
+            List<Models.yj_teacher> teachers = null;
+
+            try
+            {
+                // 查询条件
+                Expression<Func<yj_teacher, bool>> predicate = PredicateBuilder.True<yj_teacher>();
+
+                if (model != null)
+                {
+                    if (!string.IsNullOrEmpty(model.teacher_name))
+                    {
+                        predicate = predicate.And(p => p.teacher_name.Contains(model.teacher_name));
+                    }
+                }
+
+                // 排序
+                Expression<Func<yj_teacher, int>> orderby = r => r.teacher_id;
+
+                teachers = GetObjects(predicate, orderby, true).ToList();
+            }
+            catch (Exception ex)
+            {
+                Common.Logger.Error("分页获取 teacher 信息，ERROR：", ex);
+            }
+
+            // 为空时，给默认
+            if (teachers == null)
+            {
+                teachers = new List<Models.yj_teacher>();
+            }
+
+            return teachers;
         }
 
         /// <summary>
@@ -68,9 +131,9 @@ namespace Yj.Biz
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public Models.yj_teacher GetModelById(int id)
+        public Models.yj_teacher GetModelById(int teacher_id)
         {
-            return null; //GetObject(s => s.user_id == sysUserId);
+            return GetObject(s => s.teacher_id == teacher_id);
         }
 
         /// <summary>
@@ -88,6 +151,29 @@ namespace Yj.Biz
         /// <returns></returns>
         public bool EditModel(Models.yj_teacher model)
         {
+            try
+            {
+                using (Ls_dataContext db = new Ls_dataContext())
+                {
+                    int result = db.yj_teacher.Where(u => u.teacher_id == model.teacher_id).Update(u => new yj_teacher
+                    {
+                        teacher_name = model.teacher_name,
+                        teacher_description = model.teacher_description,
+                        modify_date = DateTime.Now
+                    });
+
+                    if (result >= 0)
+                    {
+                        // 删除成功
+                        return true;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Common.Logger.Error("修改 teacher 出错，ERROR：", ex);
+            }
+
             return false;
         }
 
@@ -95,8 +181,26 @@ namespace Yj.Biz
         /// 删除 yj_teacher 信息
         /// </summary>
         /// <returns></returns>
-        public bool Delete(int sysUserId)
+        public bool Delete(int teacher_id)
         {
+            try
+            {
+                using (Ls_dataContext db = new Ls_dataContext())
+                {
+                    int result = db.yj_teacher.Where(u => u.teacher_id == teacher_id).Update(u => new yj_teacher { is_del = 1 });
+
+                    if (result >= 0)
+                    {
+                        // 删除成功
+                        return true;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Common.Logger.Error("删除 teacher 出错，ERROR：", ex);
+            }
+
             return false;
         }
     }
