@@ -147,16 +147,8 @@ namespace Yj.Biz
         /// 添加 ls_log 信息
         /// </summary>
         /// <returns></returns>
-        public bool AddLog(string description)
+        public bool AddLog(Models.ls_log log)
         {
-            Models.ls_log log = new Models.ls_log
-            {
-                user_id = 0,
-                user_name = "",
-                log_description = description,
-                log_date = DateTime.Now
-            };
-
             return AddObject(log);
         }
     }
