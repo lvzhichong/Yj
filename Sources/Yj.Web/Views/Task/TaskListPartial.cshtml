@@ -1,31 +1,31 @@
-﻿@model PagedList<Yj.Models.yj_team>
+﻿@model PagedList<Yj.Models.yj_task>
 @using Webdiyer.WebControls.Mvc;
 <div id="gridTable">
     <table class="table table-border table-bordered table-bg">
         <thead>
             <tr>
-                <th scope="col" colspan="9">小组列表</th>
+                <th scope="col" colspan="9">任务列表</th>
             </tr>
             <tr class="text-c">
                 <th width="25">
                     <input type="checkbox" name="" value=""></th>
-                <th>小组名</th>
+                <th>任务名</th>
                 <th>描述</th>
                 <th width="160">操作</th>
             </tr>
         </thead>
         <tbody>
-            @foreach (Yj.Models.yj_team team in Model)
+            @foreach (Yj.Models.yj_task task in Model)
             {
                 <tr class="text-c">
                     <td>
-                        <input type="checkbox" value="@team.team_id" name="">
+                        <input type="checkbox" value="@task.task_id" name="">
                     </td>
-                    <td>@team.team_name</td>
-                    <td>@team.team_description</td>
+                    <td>@task.task_name</td>
+                    <td>@task.task_description</td>
                     <td>
-                        <a href="javascript:;" onclick="edit_team('编辑小组','/Team/EditTeam?team_id=@team.team_id','800','260')"><i class="Hui-iconfont" title="编辑"></i></a>
-                        &nbsp;&nbsp;|&nbsp;&nbsp;<a id="delete" href="javascript:del_team('@team.team_id');"><i class="Hui-iconfont" title="删除"></i></a>
+                        <a href="javascript:;" onclick="edit_task('编辑任务','/Task/EditTask?task_id=@task.task_id','800','260')"><i class="Hui-iconfont" title="编辑"></i></a>
+                        &nbsp;&nbsp;|&nbsp;&nbsp;<a id="delete" href="javascript:del_task('@task.task_id');"><i class="Hui-iconfont" title="删除"></i></a>
                     </td>
                 </tr>
             }
