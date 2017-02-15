@@ -2954,6 +2954,9 @@
     <Content Include="Views\Module\ModuleListPartial.cshtml" />
     <Content Include="Views\Log\Index.cshtml" />
     <Content Include="Views\Log\LogListPartial.cshtml" />
+    <Content Include="Views\Team\EditTeam.cshtml" />
+    <Content Include="Views\Team\Index.cshtml" />
+    <Content Include="Views\Team\TeamListPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Yj.Biz\Yj.Biz.csproj">
