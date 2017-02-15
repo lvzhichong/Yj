@@ -78,6 +78,11 @@
     <Compile Include="ls_user.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ls_log.cs" />
+    <Compile Include="yj_task.cs" />
+    <Compile Include="yj_teacher.cs" />
+    <Compile Include="yj_teacher_task.cs" />
+    <Compile Include="yj_team.cs" />
+    <Compile Include="yj_team_teacher.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
