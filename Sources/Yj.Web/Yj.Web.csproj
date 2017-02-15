@@ -123,6 +123,8 @@
     <Compile Include="Controllers\ModuleController.cs" />
     <Compile Include="Controllers\LogController.cs" />
     <Compile Include="Controllers\TeamController.cs" />
+    <Compile Include="Controllers\TeacherController.cs" />
+    <Compile Include="Controllers\TaskController.cs" />
     <Compile Include="MvcExtensions\MvcExtensions.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
