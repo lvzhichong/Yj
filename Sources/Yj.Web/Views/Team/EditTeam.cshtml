@@ -6,7 +6,7 @@
     @using (Ajax.BeginForm("EditTeam", "Team", new { team_id = Request.QueryString["team_id"] }, new AjaxOptions { HttpMethod = "Post", UpdateTargetId = "edit", OnSuccess = "OnSuccess" }, new { @class = "form form-horizontal", id = "form-article-add" }))
     {
         <div class="row cl">
-            <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>代号：</label>
+            <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>小组名：</label>
             <div class="formControls col-xs-8 col-sm-9">
                 @Html.HiddenFor(m => m.team_id)
                 @Html.TextBoxFor(m => m.team_name, new { @class = "input-text", style = "width: 360px" })
@@ -14,7 +14,7 @@
             </div>
         </div>
         <div class="row cl">
-            <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>权限名：</label>
+            <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>小组描述：</label>
             <div class="formControls col-xs-8 col-sm-9">
                 @Html.TextAreaFor(m => m.team_description, new { @class = "textarea", placeholder = "说点什么...", style = "width: 360px", onkeyup = "textarealength(this,200)" })
                 @Html.ValidationMessageFor(m => m.team_description)
