@@ -10,7 +10,9 @@
                 <th width="25">
                     <input type="checkbox" name="" value=""></th>
                 <th>日志描述</th>
-                <th>时间</th>
+                <th width="60">操作者id</th>
+                <th width="100">操作者用户名</th>
+                <th width="120">时间</th>
             </tr>
         </thead>
         <tbody>
@@ -21,6 +23,8 @@
                         <input type="checkbox" value="@log.log_id" name="">
                     </td>
                     <td>@log.log_description</td>
+                    <td>@log.user_id</td>
+                    <td>@log.user_name</td>
                     <td>@log.log_date</td>
                 </tr>
             }

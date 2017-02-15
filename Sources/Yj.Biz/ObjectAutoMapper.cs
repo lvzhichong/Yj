@@ -52,6 +52,10 @@ namespace Yj.Biz
             // Module
             Mapper.CreateMap<DataAccess.Models.ls_duty_module, Models.ls_duty_module>();
             Mapper.CreateMap<Models.ls_duty_module, DataAccess.Models.ls_duty_module>();
+
+            // Log
+            Mapper.CreateMap<DataAccess.Models.ls_log, Models.ls_log>();
+            Mapper.CreateMap<Models.ls_log, DataAccess.Models.ls_log>();
         }
     }
 }
