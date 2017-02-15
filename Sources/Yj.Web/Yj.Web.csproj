@@ -2957,6 +2957,12 @@
     <Content Include="Views\Team\EditTeam.cshtml" />
     <Content Include="Views\Team\Index.cshtml" />
     <Content Include="Views\Team\TeamListPartial.cshtml" />
+    <Content Include="Views\Task\EditTask.cshtml" />
+    <Content Include="Views\Task\Index.cshtml" />
+    <Content Include="Views\Task\TaskListPartial.cshtml" />
+    <Content Include="Views\Teacher\EditTeacher.cshtml" />
+    <Content Include="Views\Teacher\Index.cshtml" />
+    <Content Include="Views\Teacher\TeacherListPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Yj.Biz\Yj.Biz.csproj">

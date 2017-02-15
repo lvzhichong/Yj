@@ -1,0 +1,54 @@
+﻿@model PagedList<Yj.Models.yj_team>
+@using Webdiyer.WebControls.Mvc;
+<div id="gridTable">
+    <table class="table table-border table-bordered table-bg">
+        <thead>
+            <tr>
+                <th scope="col" colspan="9">小组列表</th>
+            </tr>
+            <tr class="text-c">
+                <th width="25">
+                    <input type="checkbox" name="" value=""></th>
+                <th>小组名</th>
+                <th>描述</th>
+                <th width="160">操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Yj.Models.yj_team team in Model)
+            {
+                <tr class="text-c">
+                    <td>
+                        <input type="checkbox" value="@team.team_id" name="">
+                    </td>
+                    <td>@team.team_name</td>
+                    <td>@team.team_description</td>
+                    <td>
+                        <a href="javascript:;" onclick="edit_team('编辑小组','/Team/EditTeam?team_id=@team.team_id','800','260')"><i class="Hui-iconfont" title="编辑"></i></a>
+                        &nbsp;&nbsp;|&nbsp;&nbsp;<a id="delete" href="javascript:del_team('@team.team_id');"><i class="Hui-iconfont" title="删除"></i></a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    @Html.AjaxPager(Model,
+    new PagerOptions
+    {
+        Id = "pager",
+        CssClass = "pager",
+        PageIndexParameterName = "page",
+        ShowPageIndexBox = true,
+        FirstPageText = "首页",
+        PrevPageText = "上一页",
+        NextPageText = "下一页",
+        LastPageText = "末页",
+        PageIndexBoxType = PageIndexBoxType.TextBox,
+        PageIndexBoxWrapperFormatString = "请输入页数{0}",
+        GoButtonText = "转到"
+    },
+    new AjaxOptions
+    {
+        HttpMethod = "Post",
+        UpdateTargetId = "gridTable"
+    })
+</div>
